@@ -16,45 +16,39 @@ namespace Nightlight
 
     class NightlightApplication : ApplicationContext
     {
+        private static bool _isLight;
         private NotifyIcon _notifyIcon;
         private ContextMenuStrip _contextMenuStrip;
         private Icon _lightIcon;
         private Icon _darkIcon;
-        private Boolean _isLight;
-        private ToolStripLabel _status;
 
-        private const String LIGHT_STATUS = "Current Mode: Light";
-        private const String DARK_STATUS = "Current Mode: Dark";
+        /* Constants */
+        private const String lightIconPath = "assets/light.ico";
+        private const String darkIconPath = "assets/dark.ico";
         private const String ICON_LIGHT_TEXT = "Nightlight: Light";
         private const String ICON_DARK_TEXT = "Nightlight: Dark";
-        private Color LIGHT_MODE_BACKGROUND = Color.White;
-        private Color DARK_MODE_BACKGROUND = Color.Black;
+        private Color LIGHT_MODE_BACKGROUND = Color.WhiteSmoke;
+        private Color DARK_MODE_BACKGROUND = Color.FromArgb(50, 50, 50);
         private Color LIGHT_MODE_TEXT = Color.Black;
-        private Color DARK_MODE_TEXT = Color.White;
+        private Color DARK_MODE_TEXT = Color.WhiteSmoke;
 
         public NightlightApplication()
         {
-            /* todo logic here */
-            _isLight = true;
+            _isLight = isCurrentlyLight();
 
             // Icons
-            String lightIconPath = "assets/light.ico";
-            String darkIconPath = "assets/dark.ico";
             _lightIcon = new Icon(lightIconPath);
             _darkIcon = new Icon(darkIconPath);
 
             // Context Menu Items
-            _status = new ToolStripLabel();
-            _status.Text = _isLight ? LIGHT_STATUS : DARK_STATUS;
-
             ToolStripMenuItem lightModeButton = new ToolStripMenuItem();
             lightModeButton.Image = Image.FromFile(lightIconPath);
-            lightModeButton.Text = " Activate Light Mode";
+            lightModeButton.Text = "Activate Light Mode";
             lightModeButton.Click += OnLightMode;
 
             ToolStripMenuItem darkModeButton = new ToolStripMenuItem();
             darkModeButton.Image = Image.FromFile(darkIconPath);
-            darkModeButton.Text = " Activate Dark Mode";
+            darkModeButton.Text = "Activate Dark Mode";
             darkModeButton.Click += OnDarkMode;
 
             ToolStripMenuItem aboutButton = new ToolStripMenuItem();
@@ -66,59 +60,74 @@ namespace Nightlight
             exitButton.Click += OnExit;
 
             ToolStripItem[] toolStripItems = new ToolStripItem[] {
-                _status,
-                new ToolStripSeparator(),
                 lightModeButton,
                 darkModeButton,
-                new ToolStripSeparator(),
                 aboutButton,
                 exitButton
             };
 
             // Context Menu
             _contextMenuStrip = new ContextMenuStrip();
-            _contextMenuStrip.ShowCheckMargin = false;
             _contextMenuStrip.ShowItemToolTips = false;
-            _contextMenuStrip.BackColor = _isLight ? LIGHT_MODE_BACKGROUND : DARK_MODE_BACKGROUND;
-            _contextMenuStrip.ForeColor = _isLight ? LIGHT_MODE_TEXT : DARK_MODE_TEXT;
             _contextMenuStrip.Items.AddRange(toolStripItems);
+            _contextMenuStrip.Renderer = new CustomRenderer();
 
             // Notify Icon
             _notifyIcon = new NotifyIcon();
-            _notifyIcon.Text = _isLight ? ICON_LIGHT_TEXT : ICON_DARK_TEXT;
-            _notifyIcon.Icon = _isLight ? _lightIcon : _darkIcon;
             _notifyIcon.Visible = true;
             _notifyIcon.ContextMenuStrip = _contextMenuStrip;
             _notifyIcon.Click += OnIconClick;
+
+            // Initialize
+            if (_isLight)
+            {
+                activateLightMode();
+            }
+            else
+            {
+                activateDarkMode();
+            }
+        }
+
+        private bool isCurrentlyLight()
+        {
+            // TODO
+            return true;
         }
 
         private void activateLightMode()
         {
-            _contextMenuStrip.BackColor = LIGHT_MODE_BACKGROUND;
-            _contextMenuStrip.ForeColor = LIGHT_MODE_TEXT;
+            foreach (ToolStripItem item in _contextMenuStrip.Items)
+            {
+                item.BackColor = LIGHT_MODE_BACKGROUND;
+                item.ForeColor = LIGHT_MODE_TEXT;
+            }
             _notifyIcon.Icon = _lightIcon;
-            _status.Text = LIGHT_STATUS;
             _notifyIcon.Text = ICON_LIGHT_TEXT;
             _isLight = true;
         }
 
         private void activateDarkMode()
         {
-            _contextMenuStrip.BackColor = DARK_MODE_BACKGROUND;
-            _contextMenuStrip.ForeColor = DARK_MODE_TEXT;
+            foreach (ToolStripItem item in _contextMenuStrip.Items)
+            {
+                item.BackColor = DARK_MODE_BACKGROUND;
+                item.ForeColor = DARK_MODE_TEXT;
+            }
             _notifyIcon.Icon = _darkIcon;
-            _status.Text = DARK_STATUS;
             _notifyIcon.Text = ICON_DARK_TEXT;
             _isLight = false;
         }
 
         void OnIconClick(object sender, EventArgs e)
         {
+            // If icon is right-clicked, user is opening context menu, do not toggle Nightlight
             if (((MouseEventArgs)e).Button == MouseButtons.Right)
             {
                 return;
             }
 
+            // Toggle Nightlight
             if (_isLight)
             {
                 activateDarkMode();
@@ -148,6 +157,30 @@ namespace Nightlight
         {
             _notifyIcon.Dispose();
             Application.Exit();
+        }
+        class CustomRenderer : ToolStripProfessionalRenderer
+        {
+            public CustomRenderer() : base(new CustomColors()) { }
+        }
+
+        class CustomColors : ProfessionalColorTable
+        {
+            private Color _hoverColor = Color.FromArgb(175, 175, 175);
+
+            public override Color MenuItemSelectedGradientBegin
+            {
+                get { return _hoverColor; }
+            }
+
+            public override Color MenuItemSelectedGradientEnd
+            {
+                get { return _hoverColor; }
+            }
+
+            public override Color MenuItemBorder
+            {
+                get { return _hoverColor; }
+            }
         }
     }
 }
