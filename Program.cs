@@ -47,27 +47,22 @@ namespace Nightlight
             _status = new ToolStripLabel();
             _status.Text = _isLight ? LIGHT_STATUS : DARK_STATUS;
 
-            ToolStripButton lightModeButton = new ToolStripButton();
+            ToolStripMenuItem lightModeButton = new ToolStripMenuItem();
             lightModeButton.Image = Image.FromFile(lightIconPath);
             lightModeButton.Text = " Activate Light Mode";
             lightModeButton.Click += OnLightMode;
 
-            ToolStripButton darkModeButton = new ToolStripButton();
+            ToolStripMenuItem darkModeButton = new ToolStripMenuItem();
             darkModeButton.Image = Image.FromFile(darkIconPath);
             darkModeButton.Text = " Activate Dark Mode";
             darkModeButton.Click += OnDarkMode;
 
-            ToolStripButton aboutButton = new ToolStripButton();
+            ToolStripMenuItem aboutButton = new ToolStripMenuItem();
             aboutButton.Text = "About";
             aboutButton.Click += OnAbout;
 
-            ToolStripButton exitButton = new ToolStripButton();
-            exitButton.AutoSize = false;
-            // exitButton.Width = 400;
-            exitButton.Margin = new Padding(0);
-            exitButton.Padding = new Padding(0);
-            // exitButton.AutoSize = true;
-
+            ToolStripMenuItem exitButton = new ToolStripMenuItem();
+            exitButton.Text = "Exit";
             exitButton.Click += OnExit;
 
             ToolStripItem[] toolStripItems = new ToolStripItem[] {
@@ -82,18 +77,11 @@ namespace Nightlight
 
             // Context Menu
             _contextMenuStrip = new ContextMenuStrip();
-            _contextMenuStrip.ShowImageMargin = false;
             _contextMenuStrip.ShowCheckMargin = false;
             _contextMenuStrip.ShowItemToolTips = false;
-            _contextMenuStrip.Padding = new Padding(0);
-            _contextMenuStrip.Margin = new Padding(0);
             _contextMenuStrip.BackColor = _isLight ? LIGHT_MODE_BACKGROUND : DARK_MODE_BACKGROUND;
             _contextMenuStrip.ForeColor = _isLight ? LIGHT_MODE_TEXT : DARK_MODE_TEXT;
             _contextMenuStrip.Items.AddRange(toolStripItems);
-
-
-            exitButton.Width = _contextMenuStrip.Width;
-            exitButton.Text = "Exit: " + exitButton.Width;
 
             // Notify Icon
             _notifyIcon = new NotifyIcon();
