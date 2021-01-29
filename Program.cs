@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -150,7 +151,11 @@ namespace Nightlight
 
         void OnAbout(object sender, EventArgs e)
         {
-            // TODO
+            String url = "https://github.com/walterimaican/nightlight";
+
+            // See https://github.com/dotnet/corefx/issues/10361
+            url = url.Replace("&", "^&");
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
         }
 
         void OnExit(object sender, EventArgs e)
