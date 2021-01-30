@@ -10,6 +10,8 @@ namespace Nightlight
         private ThemeSwitcher _themeSwitcher;
         private NotifyIcon _notifyIcon;
         private ContextMenuStrip _contextMenuStrip;
+        private ToolStripMenuItem _settingsMenu;
+        private CustomToolStripSeparator[] _separators;
         private Icon _lightIcon;
         private Icon _darkIcon;
 
@@ -61,11 +63,11 @@ namespace Nightlight
             systemThemeButton.CheckOnClick = true;
             systemThemeButton.Click += OnSystemToggle;
 
-            ToolStripMenuItem settingsButton = new ToolStripMenuItem();
-            settingsButton.Image = Image.FromFile(SETTINGS_ICON_PATH);
-            settingsButton.Text = "Settings";
-            settingsButton.DropDownItems.Add(appsThemeButton);
-            settingsButton.DropDownItems.Add(systemThemeButton);
+            _settingsMenu = new ToolStripMenuItem();
+            _settingsMenu.Image = Image.FromFile(SETTINGS_ICON_PATH);
+            _settingsMenu.Text = "Settings";
+            _settingsMenu.DropDownItems.Add(appsThemeButton);
+            _settingsMenu.DropDownItems.Add(systemThemeButton);
 
             ToolStripMenuItem aboutButton = new ToolStripMenuItem();
             aboutButton.Image = Image.FromFile(HELP_ICON_PATH);
@@ -76,18 +78,26 @@ namespace Nightlight
             exitButton.Text = "Exit";
             exitButton.Click += OnExit;
 
-            ToolStripMenuItem[] toolStripMenuItems = new ToolStripMenuItem[] {
+            _separators = new CustomToolStripSeparator[]
+            {
+                new CustomToolStripSeparator(),
+                new CustomToolStripSeparator()
+            };
+
+            ToolStripItem[] toolStripItems = new ToolStripItem[] {
                 lightModeButton,
                 darkModeButton,
-                settingsButton,
+                _separators[0],
+                _settingsMenu,
                 aboutButton,
+                _separators[1],
                 exitButton
             };
 
             // Context Menu
             _contextMenuStrip = new ContextMenuStrip();
             _contextMenuStrip.ShowItemToolTips = false;
-            _contextMenuStrip.Items.AddRange(toolStripMenuItems);
+            _contextMenuStrip.Items.AddRange(toolStripItems);
             _contextMenuStrip.Renderer = new CustomRenderer();
 
             // Notify Icon
@@ -99,29 +109,30 @@ namespace Nightlight
             // Initialize UI
             if (_themeSwitcher.getIsLight())
             {
-                activateLightMode();
+                ActivateLightMode();
             }
             else
             {
-                activateDarkMode();
+                ActivateDarkMode();
             }
         }
 
-        private void activateLightMode()
+        private void ActivateLightMode()
         {
-            foreach (ToolStripMenuItem item in _contextMenuStrip.Items)
+            foreach (ToolStripItem item in _contextMenuStrip.Items)
             {
                 item.BackColor = LIGHT_MODE_BACKGROUND;
                 item.ForeColor = LIGHT_MODE_TEXT;
-
-                if (item.HasDropDownItems)
-                {
-                    foreach (ToolStripMenuItem subItem in item.DropDownItems)
-                    {
-                        subItem.BackColor = LIGHT_MODE_BACKGROUND;
-                        subItem.ForeColor = LIGHT_MODE_TEXT;
-                    }
-                }
+            }
+            foreach (ToolStripMenuItem item in _settingsMenu.DropDownItems)
+            {
+                item.BackColor = LIGHT_MODE_BACKGROUND;
+                item.ForeColor = LIGHT_MODE_TEXT;
+            }
+            foreach (CustomToolStripSeparator item in _separators)
+            {
+                item.BackColor = LIGHT_MODE_BACKGROUND;
+                item.ForeColor = LIGHT_MODE_TEXT;
             }
             _notifyIcon.Icon = _lightIcon;
             _notifyIcon.Text = ICON_LIGHT_TEXT;
@@ -129,21 +140,22 @@ namespace Nightlight
             _themeSwitcher.setThemeToLight();
         }
 
-        private void activateDarkMode()
+        private void ActivateDarkMode()
         {
-            foreach (ToolStripMenuItem item in _contextMenuStrip.Items)
+            foreach (ToolStripItem item in _contextMenuStrip.Items)
             {
                 item.BackColor = DARK_MODE_BACKGROUND;
                 item.ForeColor = DARK_MODE_TEXT;
-
-                if (item.HasDropDownItems)
-                {
-                    foreach (ToolStripMenuItem subItem in item.DropDownItems)
-                    {
-                        subItem.BackColor = DARK_MODE_BACKGROUND;
-                        subItem.ForeColor = DARK_MODE_TEXT;
-                    }
-                }
+            }
+            foreach (ToolStripMenuItem item in _settingsMenu.DropDownItems)
+            {
+                item.BackColor = DARK_MODE_BACKGROUND;
+                item.ForeColor = DARK_MODE_TEXT;
+            }
+            foreach (CustomToolStripSeparator item in _separators)
+            {
+                item.BackColor = DARK_MODE_BACKGROUND;
+                item.ForeColor = DARK_MODE_TEXT;
             }
             _notifyIcon.Icon = _darkIcon;
             _notifyIcon.Text = ICON_DARK_TEXT;
@@ -162,22 +174,22 @@ namespace Nightlight
             // Toggle Nightlight
             if (_themeSwitcher.getIsLight())
             {
-                activateDarkMode();
+                ActivateDarkMode();
             }
             else
             {
-                activateLightMode();
+                ActivateLightMode();
             }
         }
 
         void OnLightMode(object sender, EventArgs e)
         {
-            activateLightMode();
+            ActivateLightMode();
         }
 
         void OnDarkMode(object sender, EventArgs e)
         {
-            activateDarkMode();
+            ActivateDarkMode();
         }
 
         void OnAppsToggle(object sender, EventArgs e)
@@ -207,29 +219,54 @@ namespace Nightlight
             _notifyIcon.Dispose();
             Application.Exit();
         }
-        class CustomRenderer : ToolStripProfessionalRenderer
+    }
+
+    class CustomRenderer : ToolStripProfessionalRenderer
+    {
+        public CustomRenderer() : base(new CustomColors()) { }
+    }
+
+    class CustomColors : ProfessionalColorTable
+    {
+        private Color _hoverColor = Color.FromArgb(150, 150, 150);
+
+        public override Color MenuItemSelectedGradientBegin
         {
-            public CustomRenderer() : base(new CustomColors()) { }
+            get { return _hoverColor; }
         }
 
-        class CustomColors : ProfessionalColorTable
+        public override Color MenuItemSelectedGradientEnd
         {
-            private Color _hoverColor = Color.FromArgb(150, 150, 150);
+            get { return _hoverColor; }
+        }
 
-            public override Color MenuItemSelectedGradientBegin
-            {
-                get { return _hoverColor; }
-            }
+        public override Color MenuItemBorder
+        {
+            get { return _hoverColor; }
+        }
+    }
 
-            public override Color MenuItemSelectedGradientEnd
-            {
-                get { return _hoverColor; }
-            }
+    class CustomToolStripSeparator : ToolStripSeparator
+    {
+        // Override the base class values
+        new public Color BackColor;
+        new public Color ForeColor;
 
-            public override Color MenuItemBorder
-            {
-                get { return _hoverColor; }
-            }
+        public CustomToolStripSeparator()
+        {
+            this.Paint += CustomPaintHandler;
+        }
+
+        private void CustomPaintHandler(object sender, PaintEventArgs e)
+        {
+            // Get dimensions of old separator
+            ToolStripSeparator oldSeparator = sender as ToolStripSeparator;
+            int width = oldSeparator.Width;
+            int height = oldSeparator.Height;
+
+            // Paint new separator
+            e.Graphics.FillRectangle(new SolidBrush(BackColor), 0, 0, width, height);
+            e.Graphics.DrawLine(new Pen(ForeColor), 4, height / 2, width - 4, height / 2);
         }
     }
 }
