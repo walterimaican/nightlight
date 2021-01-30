@@ -1,20 +1,22 @@
+using System;
 using Microsoft.Win32;
 
 namespace Nightlight
 {
     class ThemeSwitcher
     {
-        // SET REG_KEY=HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize
-        // SET REG_VALUE=AppsUseLightTheme
-        // FOR /F "tokens=2*" %%A IN ('REG QUERY %REG_KEY% /v %REG_VALUE%') DO SET IS_LIGHT_NOT_DARK=%%B
-        // IF %IS_LIGHT_NOT_DARK%==0x1 (REG ADD %REG_KEY% /v %REG_VALUE% /t REG_DWORD /d 0 /f) ELSE (REG ADD %REG_KEY% /v %REG_VALUE% /t REG_DWORD /d 1 /f)
-
+        // TODO
+        // Offer SystemUsesLightTheme as well (flips taskbar and startmenu)
+        // AppsUseLightTheme is for everything else
         private bool _isLight;
+
+        /* Constants */
+        private const String REG_KEY = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize";
+        private const String REG_VALUE = "AppsUseLightTheme";
 
         public ThemeSwitcher()
         {
-            // TODO
-            _isLight = false;
+            _isLight = Convert.ToBoolean((Int32)Registry.GetValue(REG_KEY, REG_VALUE, 1));
         }
 
         public bool getIsLight()
@@ -24,11 +26,13 @@ namespace Nightlight
 
         public void setThemeToLight()
         {
+            Registry.SetValue(REG_KEY, REG_VALUE, 1, RegistryValueKind.DWord);
             this._isLight = true;
         }
 
         public void setThemeToDark()
         {
+            Registry.SetValue(REG_KEY, REG_VALUE, 0, RegistryValueKind.DWord);
             this._isLight = false;
         }
     }
