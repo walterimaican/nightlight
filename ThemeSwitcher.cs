@@ -16,7 +16,8 @@ namespace Nightlight
 
         public ThemeSwitcher()
         {
-            _isLight = Convert.ToBoolean((Int32)Registry.GetValue(REG_KEY, REG_VALUE, 1));
+            // Get current value - default to dark mode if not found 
+            _isLight = Convert.ToBoolean((Int32)Registry.GetValue(REG_KEY, REG_VALUE, 0));
         }
 
         public bool getIsLight()
