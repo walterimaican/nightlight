@@ -17,55 +17,55 @@ namespace Nightlight
         public ThemeSwitcher()
         {
             // Get current value from apps registry - default to dark mode if not found 
-            this._isLight = Convert.ToBoolean((Int32)Registry.GetValue(REG_KEY, REG_VALUE_APPS, 0));
+            _isLight = Convert.ToBoolean((Int32)Registry.GetValue(REG_KEY, REG_VALUE_APPS, 0));
 
             // By default, enable toggling of apps, disable toggling of system
-            this._shouldToggleApps = true;
+            _shouldToggleApps = true;
         }
 
-        public bool getIsLight()
+        public bool GetIsLight()
         {
-            return this._isLight;
+            return _isLight;
         }
 
-        public void setShouldToggleApps(bool value)
+        public void SetShouldToggleApps(bool value)
         {
-            this._shouldToggleApps = value;
+            _shouldToggleApps = value;
         }
 
-        public void setShouldToggleSystem(bool value)
+        public void SetShouldToggleSystem(bool value)
         {
-            this._shouldToggleSystem = value;
+            _shouldToggleSystem = value;
         }
 
-        public void setThemeToLight()
+        public void SetThemeToLight()
         {
-            if (this._shouldToggleApps)
+            if (_shouldToggleApps)
             {
                 Registry.SetValue(REG_KEY, REG_VALUE_APPS, 1, RegistryValueKind.DWord);
             }
 
-            if (this._shouldToggleSystem)
+            if (_shouldToggleSystem)
             {
                 Registry.SetValue(REG_KEY, REG_VALUE_SYSTEM, 1, RegistryValueKind.DWord);
             }
 
-            this._isLight = true;
+            _isLight = true;
         }
 
-        public void setThemeToDark()
+        public void SetThemeToDark()
         {
-            if (this._shouldToggleApps)
+            if (_shouldToggleApps)
             {
                 Registry.SetValue(REG_KEY, REG_VALUE_APPS, 0, RegistryValueKind.DWord);
             }
 
-            if (this._shouldToggleSystem)
+            if (_shouldToggleSystem)
             {
                 Registry.SetValue(REG_KEY, REG_VALUE_SYSTEM, 0, RegistryValueKind.DWord);
             }
 
-            this._isLight = false;
+            _isLight = false;
         }
     }
 }

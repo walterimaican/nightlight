@@ -107,7 +107,7 @@ namespace Nightlight
             _notifyIcon.Click += OnIconClick;
 
             // Initialize UI
-            if (_themeSwitcher.getIsLight())
+            if (_themeSwitcher.GetIsLight())
             {
                 ActivateLightMode();
             }
@@ -137,7 +137,7 @@ namespace Nightlight
             _notifyIcon.Icon = _lightIcon;
             _notifyIcon.Text = ICON_LIGHT_TEXT;
 
-            _themeSwitcher.setThemeToLight();
+            _themeSwitcher.SetThemeToLight();
         }
 
         private void ActivateDarkMode()
@@ -160,7 +160,7 @@ namespace Nightlight
             _notifyIcon.Icon = _darkIcon;
             _notifyIcon.Text = ICON_DARK_TEXT;
 
-            _themeSwitcher.setThemeToDark();
+            _themeSwitcher.SetThemeToDark();
         }
 
         void OnIconClick(object sender, EventArgs e)
@@ -172,7 +172,7 @@ namespace Nightlight
             }
 
             // Toggle Nightlight
-            if (_themeSwitcher.getIsLight())
+            if (_themeSwitcher.GetIsLight())
             {
                 ActivateDarkMode();
             }
@@ -195,13 +195,13 @@ namespace Nightlight
         void OnAppsToggle(object sender, EventArgs e)
         {
             ToolStripMenuItem appsButton = sender as ToolStripMenuItem;
-            _themeSwitcher.setShouldToggleApps(appsButton.Checked);
+            _themeSwitcher.SetShouldToggleApps(appsButton.Checked);
         }
 
         void OnSystemToggle(object sender, EventArgs e)
         {
             ToolStripMenuItem systemButton = sender as ToolStripMenuItem;
-            _themeSwitcher.setShouldToggleSystem(systemButton.Checked);
+            _themeSwitcher.SetShouldToggleSystem(systemButton.Checked);
 
         }
 
@@ -230,6 +230,7 @@ namespace Nightlight
     {
         private Color _hoverColor = Color.FromArgb(150, 150, 150);
 
+        // Gradient used here - MenuItemSelected does not work
         public override Color MenuItemSelectedGradientBegin
         {
             get { return _hoverColor; }
