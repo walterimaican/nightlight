@@ -14,8 +14,8 @@ namespace Nightlight
         private Icon _darkIcon;
 
         /* Constants */
-        private const String lightIconPath = "assets/light.ico";
-        private const String darkIconPath = "assets/dark.ico";
+        private const String LIGHT_ICON_PATH = "assets/light.ico";
+        private const String DARK_ICON_PATH = "assets/dark.ico";
         private const String ICON_LIGHT_TEXT = "Nightlight: Light";
         private const String ICON_DARK_TEXT = "Nightlight: Dark";
         private Color LIGHT_MODE_BACKGROUND = Color.WhiteSmoke;
@@ -28,17 +28,17 @@ namespace Nightlight
             _isLight = isCurrentlyLight();
 
             // Icons
-            _lightIcon = new Icon(lightIconPath);
-            _darkIcon = new Icon(darkIconPath);
+            _lightIcon = new Icon(LIGHT_ICON_PATH);
+            _darkIcon = new Icon(DARK_ICON_PATH);
 
             // Context Menu Items
             ToolStripMenuItem lightModeButton = new ToolStripMenuItem();
-            lightModeButton.Image = Image.FromFile(lightIconPath);
+            lightModeButton.Image = Image.FromFile(LIGHT_ICON_PATH);
             lightModeButton.Text = "Activate Light Mode";
             lightModeButton.Click += OnLightMode;
 
             ToolStripMenuItem darkModeButton = new ToolStripMenuItem();
-            darkModeButton.Image = Image.FromFile(darkIconPath);
+            darkModeButton.Image = Image.FromFile(DARK_ICON_PATH);
             darkModeButton.Text = "Activate Dark Mode";
             darkModeButton.Click += OnDarkMode;
 
