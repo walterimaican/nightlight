@@ -2,13 +2,20 @@
 
 A system tray/notification icon to quickly change Windows theming between light and dark.
 
+## Table of Contents
+- [Installing](#installing)
+- [Using Nightlight](#using-nightlight)
+- [Compatibility](#compatibility)
+- [For Developers](#for-developers)
+- [Credits](#credits)
+
 # Installing
 
 TODO
 
 TODO -> Add capability to start Nightlight on Windows startup
 
-# How to use Nightlight
+# Using Nightlight
 
 Left click on the Nightlight icon to toggle between light and dark mode.
 
