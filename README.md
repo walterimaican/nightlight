@@ -78,6 +78,11 @@ Nightlight was created with .Net 5.0.2 and written in C#.  Install the latest ve
 - `NightlightApp.cs` contains the icon UI
 - `ThemeSwitcher.cs` contains the code to change Windows Registry values
 
+To do a clean build and run Nightlight, use the following command in your CLI:
+```
+make
+```
+
 # Credits
 
 Settings icon was made by Freepik from www.flaticon.com.
