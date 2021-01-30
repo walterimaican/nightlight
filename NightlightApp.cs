@@ -7,7 +7,7 @@ namespace Nightlight
 {
     class NightlightApp : ApplicationContext
     {
-        private static bool _isLight;
+        private ThemeSwitcher _themeSwitcher;
         private NotifyIcon _notifyIcon;
         private ContextMenuStrip _contextMenuStrip;
         private Icon _lightIcon;
@@ -25,7 +25,7 @@ namespace Nightlight
 
         public NightlightApp()
         {
-            _isLight = isCurrentlyLight();
+            _themeSwitcher = new ThemeSwitcher();
 
             // Icons
             _lightIcon = new Icon(LIGHT_ICON_PATH);
@@ -69,8 +69,8 @@ namespace Nightlight
             _notifyIcon.ContextMenuStrip = _contextMenuStrip;
             _notifyIcon.Click += OnIconClick;
 
-            // Initialize
-            if (_isLight)
+            // Initialize UI
+            if (_themeSwitcher.getIsLight())
             {
                 activateLightMode();
             }
@@ -78,12 +78,6 @@ namespace Nightlight
             {
                 activateDarkMode();
             }
-        }
-
-        private bool isCurrentlyLight()
-        {
-            // TODO
-            return true;
         }
 
         private void activateLightMode()
@@ -95,7 +89,8 @@ namespace Nightlight
             }
             _notifyIcon.Icon = _lightIcon;
             _notifyIcon.Text = ICON_LIGHT_TEXT;
-            _isLight = true;
+
+            _themeSwitcher.setThemeToLight();
         }
 
         private void activateDarkMode()
@@ -107,7 +102,8 @@ namespace Nightlight
             }
             _notifyIcon.Icon = _darkIcon;
             _notifyIcon.Text = ICON_DARK_TEXT;
-            _isLight = false;
+
+            _themeSwitcher.setThemeToDark();
         }
 
         void OnIconClick(object sender, EventArgs e)
@@ -119,7 +115,7 @@ namespace Nightlight
             }
 
             // Toggle Nightlight
-            if (_isLight)
+            if (_themeSwitcher.getIsLight())
             {
                 activateDarkMode();
             }
