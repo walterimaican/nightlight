@@ -170,7 +170,7 @@ namespace Nightlight
 
         class CustomColors : ProfessionalColorTable
         {
-            private Color _hoverColor = Color.FromArgb(175, 175, 175);
+            private Color _hoverColor = Color.FromArgb(150, 150, 150);
 
             public override Color MenuItemSelectedGradientBegin
             {
