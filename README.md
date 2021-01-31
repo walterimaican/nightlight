@@ -1,6 +1,13 @@
 # Nightlight
 
-A system tray/notification icon to quickly change Windows theming between light and dark.
+A simple and lightweight notification icon to toggle Windows theming between light mode and dark mode.
+
+## Table of Contents
+- [Installing](#installing)
+- [Using Nightlight](#using-nightlight)
+- [Compatibility](#compatibility)
+- [For Developers](#for-developers)
+- [Credits](#credits)
 
 # Installing
 
@@ -8,7 +15,7 @@ TODO
 
 TODO -> Add capability to start Nightlight on Windows startup
 
-# How to use Nightlight
+# Using Nightlight
 
 Left click on the Nightlight icon to toggle between light and dark mode.
 
@@ -70,6 +77,11 @@ Nightlight was created with .Net 5.0.2 and written in C#.  Install the latest ve
 - `Program.cs` is the main entry point to Nightlight
 - `NightlightApp.cs` contains the icon UI
 - `ThemeSwitcher.cs` contains the code to change Windows Registry values
+
+To do a clean build and start Nightlight, run the following command in your CLI:
+```
+make
+```
 
 # Credits
 
