@@ -5,7 +5,6 @@ clean:
 	rm -rf src/bin
 	rm -rf src/obj
 	rm -rf release
-	rm -f nightlight.application
 
 build:
 	dotnet build src
@@ -25,4 +24,4 @@ endif
 	make build-release
 	dotnet mage -al nightlight.exe -td release
 	dotnet mage -new Application -t "release\\nightlight.manifest" -fd release -v $(v)
-	dotnet mage -new Deployment -Install true -pub "abc def" -v $(v) -AppManifest "release\\nightlight.manifest" -t nightlight.application
+	dotnet mage -new Deployment -Install true -pub "abc def" -v $(v) -AppManifest "release\\nightlight.manifest" -t "release\\nightlight.application"
