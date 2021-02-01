@@ -5,6 +5,7 @@ clean:
 	rm -rf bin
 	rm -rf obj
 	rm -rf release
+	rm -f nightlight.application
 
 build:
 	dotnet build
