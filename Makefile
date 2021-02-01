@@ -2,20 +2,20 @@
 all: clean build run
 
 clean:
-	rm -rf bin
-	rm -rf obj
+	rm -rf src/bin
+	rm -rf src/obj
 	rm -rf release
 	rm -f nightlight.application
 
 build:
-	dotnet build
+	dotnet build src
 
 run:
-	dotnet run
+	dotnet run --project src
 
 build-release:
 	mkdir -p release
-	dotnet build -c Release -o release
+	dotnet build src -c Release -o release
 
 release:
 ifndef v
