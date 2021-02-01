@@ -1,14 +1,11 @@
 all: clean build run
 
 clean:
-	rm -rf src/bin
-	rm -rf src/obj
+	rm -rf bin
+	rm -rf obj
 
 build:
-	dotnet build src
+	dotnet build
 
 run:
-	dotnet run --project src
-
-publish:
-	dotnet publish src -c Release -r win-x64
+	dotnet run
