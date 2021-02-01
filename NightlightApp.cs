@@ -1,12 +1,15 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Nightlight
 {
     class NightlightApp : ApplicationContext
     {
+        private Assembly _assembly;
         private ThemeSwitcher _themeSwitcher;
         private NotifyIcon _notifyIcon;
         private ContextMenuStrip _contextMenuStrip;
@@ -16,10 +19,10 @@ namespace Nightlight
         private Icon _darkIcon;
 
         /* Constants */
-        private const String LIGHT_ICON_PATH = "assets/light.ico";
-        private const String DARK_ICON_PATH = "assets/dark.ico";
-        private const String SETTINGS_ICON_PATH = "assets/settings.ico";
-        private const String HELP_ICON_PATH = "assets/help.ico";
+        private const String LIGHT_ICON_RESOURCE = "nightlight.assets.light.ico";
+        private const String DARK_ICON_RESOURCE = "nightlight.assets.dark.ico";
+        private const String SETTINGS_ICON_RESOURCE = "nightlight.assets.settings.ico";
+        private const String HELP_ICON_RESOURCE = "nightlight.assets.help.ico";
         private const String ICON_LIGHT_TEXT = "Nightlight: Light";
         private const String ICON_DARK_TEXT = "Nightlight: Dark";
         private Color LIGHT_MODE_BACKGROUND = Color.WhiteSmoke;
@@ -29,20 +32,26 @@ namespace Nightlight
 
         public NightlightApp()
         {
+            _assembly = Assembly.GetEntryAssembly();
+            Stream lightIconStream = _assembly.GetManifestResourceStream(LIGHT_ICON_RESOURCE);
+            Stream darkIconStream = _assembly.GetManifestResourceStream(DARK_ICON_RESOURCE);
+            Stream settingsIconStream = _assembly.GetManifestResourceStream(SETTINGS_ICON_RESOURCE);
+            Stream helpIconStream = _assembly.GetManifestResourceStream(HELP_ICON_RESOURCE);
+
             _themeSwitcher = new ThemeSwitcher();
 
             // Icons
-            _lightIcon = new Icon(LIGHT_ICON_PATH);
-            _darkIcon = new Icon(DARK_ICON_PATH);
+            _lightIcon = new Icon(lightIconStream);
+            _darkIcon = new Icon(darkIconStream);
 
             // Context Menu Items
             ToolStripMenuItem lightModeButton = new ToolStripMenuItem();
-            lightModeButton.Image = Image.FromFile(LIGHT_ICON_PATH);
+            lightModeButton.Image = Image.FromStream(lightIconStream);
             lightModeButton.Text = "Activate Light Mode";
             lightModeButton.Click += OnLightMode;
 
             ToolStripMenuItem darkModeButton = new ToolStripMenuItem();
-            darkModeButton.Image = Image.FromFile(DARK_ICON_PATH);
+            darkModeButton.Image = Image.FromStream(darkIconStream);
             darkModeButton.Text = "Activate Dark Mode";
             darkModeButton.Click += OnDarkMode;
 
@@ -64,13 +73,13 @@ namespace Nightlight
             systemThemeButton.Click += OnSystemToggle;
 
             _settingsMenu = new ToolStripMenuItem();
-            _settingsMenu.Image = Image.FromFile(SETTINGS_ICON_PATH);
+            _settingsMenu.Image = Image.FromStream(settingsIconStream);
             _settingsMenu.Text = "Settings";
             _settingsMenu.DropDownItems.Add(appsThemeButton);
             _settingsMenu.DropDownItems.Add(systemThemeButton);
 
             ToolStripMenuItem aboutButton = new ToolStripMenuItem();
-            aboutButton.Image = Image.FromFile(HELP_ICON_PATH);
+            aboutButton.Image = Image.FromStream(helpIconStream);
             aboutButton.Text = "Help && About";
             aboutButton.Click += OnHelpAndAbout;
 

@@ -6,4 +6,12 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="assets\*.*" />
+  </ItemGroup> 
+
+  <ItemGroup>
+    <EmbeddedResource Include="assets\*.*" />
+  </ItemGroup> 
+
 </Project>
