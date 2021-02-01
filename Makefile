@@ -1,3 +1,4 @@
+.SILENT:
 .PHONY: release
 all: clean build run
 
@@ -17,11 +18,12 @@ build-release:
 	dotnet build src -c Release -o release
 
 release:
-ifndef v
-	$(error Version undefined. Example: "make release v=1.0.0.0")
-endif
 	make clean
 	make build-release
+	$(eval version = $(shell cat "src\\nightlight.csproj" | grep -o "<Version>.*</Version>" | grep -o ">.*<" | sed "s/<//;s/>//"))
+	@echo ------------------------
+	@echo Deploying as v$(version)
+	@echo ------------------------
 	dotnet mage -al nightlight.exe -td release
-	dotnet mage -new Application -t "release\\nightlight.manifest" -fd release -v $(v)
-	dotnet mage -new Deployment -Install true -pub "abc def" -v $(v) -AppManifest "release\\nightlight.manifest" -t "release\\nightlight.application"
+	dotnet mage -new Application -t "release\\nightlight.manifest" -fd release -v $(version)
+	dotnet mage -new Deployment -Install true -pub "abc def" -v $(version) -AppManifest "release\\nightlight.manifest" -t "release\\nightlight.application"

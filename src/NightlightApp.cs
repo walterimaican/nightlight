@@ -33,6 +33,7 @@ namespace Nightlight
         public NightlightApp()
         {
             _assembly = Assembly.GetEntryAssembly();
+            String version = _assembly.GetName().Version.ToString();
             Stream lightIconStream = _assembly.GetManifestResourceStream(LIGHT_ICON_RESOURCE);
             Stream darkIconStream = _assembly.GetManifestResourceStream(DARK_ICON_RESOURCE);
             Stream settingsIconStream = _assembly.GetManifestResourceStream(SETTINGS_ICON_RESOURCE);
@@ -90,16 +91,19 @@ namespace Nightlight
             _separators = new CustomToolStripSeparator[]
             {
                 new CustomToolStripSeparator(),
+                new CustomToolStripSeparator(),
                 new CustomToolStripSeparator()
             };
 
             ToolStripItem[] toolStripItems = new ToolStripItem[] {
+                new ToolStripMenuItem("Nightlight v" + version),
+                _separators[0],
                 lightModeButton,
                 darkModeButton,
-                _separators[0],
+                _separators[1],
                 _settingsMenu,
                 aboutButton,
-                _separators[1],
+                _separators[2],
                 exitButton
             };
 
