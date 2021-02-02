@@ -6,6 +6,7 @@ clean:
 	rm -rf src/bin
 	rm -rf src/obj
 	rm -rf release
+	rm -rf release*.zip
 
 build:
 	dotnet build src
@@ -25,5 +26,6 @@ release:
 	@echo Deploying as v$(version)
 	@echo ------------------------
 	dotnet mage -al nightlight.exe -td release
-	dotnet mage -new Application -t "release\\nightlight.manifest" -fd release -v $(version)
-	dotnet mage -new Deployment -Install true -pub "abc def" -v $(version) -AppManifest "release\\nightlight.manifest" -t "release\\nightlight.application"
+	dotnet mage -n Application -t "release\\nightlight.manifest" -fd release -v $(version)
+	dotnet mage -n Deployment -t "release\\nightlight.application" -appm "release\\nightlight.manifest" -i true -pub "Nightlight" -v $(version)
+	tar -cf release-$(version).zip release
