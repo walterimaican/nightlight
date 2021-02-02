@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="nightlight.exe" version="1.0.0.20" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="nightlight.exe" version="1.0.0.21" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <application />
   <entryPoint>
     <assemblyIdentity name="Launcher" version="5.0.0.0" language="neutral" processorArchitecture="msil" />
@@ -59,7 +59,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>YLqZUCOLQgAidHwNtLvsPloxHoDdPLE2Sf56siKT4cQ=</dsig:DigestValue>
+      <dsig:DigestValue>jsCIy2ljYa9aNy4A1U5RwbyJHVawdQz0CuHUCHwbDX0=</dsig:DigestValue>
     </hash>
   </file>
   <file name="nightlight.dll" size="72704">
@@ -68,7 +68,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>uqLNdja9JsjA9tToy9W6tiTrGBmrU6Ul1wwBNuq5w5I=</dsig:DigestValue>
+      <dsig:DigestValue>RjYCC2xY9fDodgKWJTkbjkqq08NR3oakemGpyb2XBfU=</dsig:DigestValue>
     </hash>
   </file>
   <file name="nightlight.exe" size="142848">
@@ -77,7 +77,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>zCBXH1eGK7WQ3MUAp6puu7l8G+Ow74UeEoGfQN43Giw=</dsig:DigestValue>
+      <dsig:DigestValue>UfgU9wfrWdsoOxMhyrrObK7isnilDP1yP3hz9As90vY=</dsig:DigestValue>
     </hash>
   </file>
   <file name="nightlight.pdb" size="13144">
@@ -86,7 +86,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>K12rDjUHFEZ0s0xRepSTbFNkzp9JMVm8FFRdy7IKar0=</dsig:DigestValue>
+      <dsig:DigestValue>1lqa4bPG/caEChuZAfhVcO5WfK/APrX7rWIq/PFCk1c=</dsig:DigestValue>
     </hash>
   </file>
   <file name="nightlight.runtimeconfig.dev.json" size="176">
@@ -113,7 +113,7 @@
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>D3kJzjB/g7EIJ9nXopD/0RJ6LPKQeZ71GvAyOBeLUkw=</dsig:DigestValue>
+      <dsig:DigestValue>rdSyIpNqTLxaYPgsb8deshh5B1B1D0lNSU1SDlXL+5Q=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>
