@@ -38,6 +38,16 @@ Once inside the extracted release folder, double click on the `RUN_ME.bat` and i
 
 ![install.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/install.png)
 
+The installer may redirect you to install the .NET runtime - you will need to install it (developers: if you install the .NET SDK, the runtime comes bundled):
+
+![install-dot-net.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/install-dot-net.png)
+
+![dot-net-64-86.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/dot-net-64-86.png)
+
+![dot-net-exe.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/dot-net-exe.png)
+
+If you had to install the runtime, once it is installed, double click on the `RUN_ME.bat` and complete installation.
+
 And that's it! Nightlight should now be installed on your computer:
 
 ![installed.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/installed.png)
