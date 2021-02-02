@@ -3,19 +3,56 @@
 A simple and lightweight notification icon to toggle Windows theming between light mode and dark mode.
 
 ## Table of Contents
-- [Installing](#installing)
-- [Using Nightlight](#using-nightlight)
-- [Compatibility](#compatibility)
-- [For Developers](#for-developers)
-- [Credits](#credits)
+1. [Installing](#installing)
+2. [Using Nightlight](#using-nightlight)
+    - [General Usage](#general-usage)
+    - [Settings](#settings)
+    - [Suggestions](#suggestions)
+3. [Compatibility](#compatibility)
+4. [Uninstalling](#uninstalling)
+5. [For Developers](#for-developers)
+    - [Prerequisites](#prerequisites)
+    - [Development](#development)
+    - [Deployment](#deployment)
+6. [Credits](#credits)
 
 # Installing
 
-TODO
+Go to the latest release here:
 
-TODO -> Add capability to start Nightlight on Windows startup
+![releases.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/releases.png)
+
+Download the release-x.x.x.x.zip:
+
+![download-release.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/download-release.png)
+
+Extract the release (any program works - you can download [WinRar here](https://www.win-rar.com/predownload.html?&L=0) or [7-Zip here](https://www.7-zip.org/)):
+
+![extract.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/extract.png)
+
+![extracted-release.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/extracted-release.png)
+
+Once inside the extracted release folder, double click on the `RUN_ME.bat` and install:
+
+![run_me.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/run_me.png)
+
+![install.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/install.png)
+
+And that's it! Nightlight should now be installed on your computer:
+
+![installed.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/installed.png)
+
+If you don't immediately see it in your system/notification tray, check to see if it is hidden:
+
+![hidden.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/hidden.png)
+
+You can now delete the release files (Nightlight has been installed and does not rely on these anymore):
+
+![delete.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/delete.png)
 
 # Using Nightlight
+
+## General Usage
 
 Left click on the Nightlight icon to toggle between light and dark mode.
 
@@ -25,7 +62,7 @@ Right click on the Nightlight icon to bring up the context menu.
 
 ## Settings
 
-By default, only the `"Apps, Explorer, System"` option is enabled. When you toggle between light and dark, this will toggle Windows Applications, Windows File Explorer, as well as other applications that are listening to the "system's theme", such as Google Chrome via the [Dark Reader](https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh) extension.
+By default, only the `"Apps, Explorer, System"` option is enabled. When you toggle between light and dark, this will toggle Windows Applications, Windows File Explorer, as well as other applications that are listening to the "system's theme". See [Suggestions](#suggestions) for more details!
 
 ![light.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/light.png)
 
@@ -36,6 +73,18 @@ You can also enable the `"Start Menu & Taskbar"` option. When enabled, toggling 
 ![lightSystem.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/lightSystem.png)
 
 ![darkSystem.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/darkSystem.png)
+
+## Suggestions
+
+While Nightlight can only toggle Windows theming, you can add tie in various applications with it! (You must have the "Apps, Explorer, System" option checked).
+
+Below are some applications that can toggle with your OS, given you install the accompanying extensions:
+
+- VS Code: [Toggle Light/Dark Theme](https://marketplace.visualstudio.com/items?itemName=danielgjackson.auto-dark-mode-windows)
+- Google Chrome: [Dark Reader](https://chrome.google.com/webstore/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh)
+- GitHub (web page):
+
+![github-dark-mode.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/github-dark-mode.png)
 
 # Compatibility
 
@@ -70,18 +119,67 @@ If you see `AppsUseLightTheme` and `SystemUsesLightTheme` then Nightlight is com
 
 ![registry.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/registry.png)
 
+# Uninstalling
+
+To uninstall, go to `Apps & Features`, by doing either of the following:
+- Right-click on the Windows Icon (Start Menu Button) and click `Apps and Features`
+- Press the "Windows" and "X" keys at the same time, followed by the "F" key
+
+![apps-and-features.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/apps-and-features.png)
+
+From there, look for Nightlight and click the Uninstall button
+
+![uninstall.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/uninstall.png)
+
+![uninstall-clickonce.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/uninstall-clickonce.png)
+
+If you had Nightlight running, you may have to exit out of separately as uninstalling (currently) does not stop the program.
+
 # For Developers
 
-Nightlight was created with .Net 5.0.2 and written in C#.  Install the latest version of .Net from [here](https://dotnet.microsoft.com/download/dotnet/)
+## Prerequisites
+
+While Nightlight was built on a Windows machine for Windows installs, a few of the Makefile recipes use UNIX commands. In order to use these recipes, I recommend installing [Cmder](https://cmder.net/).
+
+Nightlight was created with .Net 5.0.2 and written in C#.  Install the latest version of .Net from [here](https://dotnet.microsoft.com/download/dotnet/).
+
+## Development
+
+
+To do a clean build and start Nightlight, run the following command in your CLI:
+
+```
+make
+```
 
 - `Program.cs` is the main entry point to Nightlight
 - `NightlightApp.cs` contains the icon UI
 - `ThemeSwitcher.cs` contains the code to change Windows Registry values
+- `assets` contains the icon files
 
-To do a clean build and start Nightlight, run the following command in your CLI:
+## Deployment
+
+Deployment is done via [ClickOnce](https://devblogs.microsoft.com/dotnet/announcing-net-5-0-rc-2/#clickonce).
+
+The following allows you to deploy via `ClickOnce` via a CLI:
+
+Download `Mage`:
+
 ```
-make
+dotnet tool install --global Microsoft.DotNet.Mage
 ```
+
+Update the version in `nightlight.csproj`:
+
+![versioning.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/versioning.png)
+
+And then run the following:
+
+```
+make release
+```
+
+The resulting `release-x.x.x.x.zip` is the distributable that will be downloaded by end users.
 
 # Credits
 
