@@ -26,4 +26,4 @@ release:
 	dotnet mage -n Application -t "release-$(version)\\nightlight.manifest" -fd release-$(version) -v $(version)
 	dotnet mage -n Deployment -t "release-$(version)\\nightlight.application" -appm "release-$(version)\\nightlight.manifest" -i true -pub "Nightlight" -v $(version)
 	echo ".\nightlight.application" > "release-$(version)\\RUN_ME.bat"
-	tar -cf release-$(version).zip release-$(version)
+	tar -cf release-$(version).tar release-$(version)
