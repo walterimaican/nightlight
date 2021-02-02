@@ -22,7 +22,7 @@ Go to the latest release here:
 
 ![releases.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/releases.png)
 
-Download the release-x.x.x.x.zip:
+Download the release-x.x.x.x.tar:
 
 ![download-release.png](https://github.com/walterimaican/nightlight/blob/main/readme-images/download-release.png)
 
@@ -86,7 +86,7 @@ You can also enable the `"Start Menu & Taskbar"` option. When enabled, toggling 
 
 ## Suggestions
 
-While Nightlight can only toggle Windows theming, you can add tie in various applications with it! (You must have the "Apps, Explorer, System" option checked).
+While Nightlight can only toggle Windows theming, you can tie in various applications with it! (You must have the "Apps, Explorer, System" option checked).
 
 Below are some applications that can toggle with your OS, given you install the accompanying extensions:
 
@@ -189,7 +189,7 @@ And then run the following:
 make release
 ```
 
-The resulting `release-x.x.x.x.zip` is the distributable that will be downloaded by end users.
+The resulting `release-x.x.x.x.tar` is the distributable that will be downloaded by end users.
 
 # Credits
 
