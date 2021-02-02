@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "nightlight/1.0.0.14": {
+        "runtime": {
+          "nightlight.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "nightlight/1.0.0.14": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
