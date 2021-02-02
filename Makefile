@@ -26,4 +26,4 @@ release:
 	@echo ------------------------
 	dotnet mage -al nightlight.exe -td release
 	dotnet mage -new Application -t "release\\nightlight.manifest" -fd release -v $(version)
-	dotnet mage -new Deployment -Install true -pub "abc def" -v $(version) -AppManifest "release\\nightlight.manifest" -t "release\\nightlight.application"
+	dotnet mage -new Deployment -Install true -pub "Nightlight" -v $(version) -AppManifest "release\\nightlight.manifest" -t "release\\nightlight.application" -pu "https://github.com/walterimaican/nightlight/blob/release/nightlight.manifest"
