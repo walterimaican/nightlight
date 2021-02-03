@@ -5,8 +5,7 @@ all: clean build run
 clean:
 	rm -rf src/bin
 	rm -rf src/obj
-	rm -rf release*
-	rm -rf release*.zip
+	rm -rf release*/
 
 build:
 	dotnet build src
@@ -16,6 +15,7 @@ run:
 
 release:
 	make clean
+	rm -rf release*.tar
 	$(eval version = $(shell cat "src\\nightlight.csproj" | grep -o "<Version>.*</Version>" | grep -o ">.*<" | sed "s/<//;s/>//"))
 	@echo ------------------------
 	@echo Deploying as v$(version)
