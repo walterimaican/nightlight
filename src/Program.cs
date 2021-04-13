@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using Microsoft.Win32;
+using System.Windows.Forms;
 
 namespace Nightlight
 {
@@ -8,6 +9,8 @@ namespace Nightlight
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            RegistryKey startupRegistry = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            startupRegistry.SetValue("Nightlight", Application.ExecutablePath.ToString());
             Application.Run(new NightlightApp());
         }
     }
